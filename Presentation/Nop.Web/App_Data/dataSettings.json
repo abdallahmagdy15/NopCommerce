@@ -1,0 +1,6 @@
+﻿{
+  "DataConnectionString": "Data Source=ABDALLAHM15\\SQLDEVELOPER;Initial Catalog=NopCommerce;Integrated Security=True;Persist Security Info=False",
+  "DataProvider": "sqlserver",
+  "SQLCommandTimeout": null,
+  "RawDataSettings": {}
+}
