@@ -1,6 +1,5 @@
 ﻿using FluentMigrator;
 using Nop.Data.Migrations;
-using Nop.Plugin.MultiFactorAuth.GoogleAuthenticator.Domains;
 using Nop.Plugin.Payment.AddressGeolocation.Domains;
 
 namespace Nop.Plugin.MultiFactorAuth.GoogleAuthenticator.Migrations

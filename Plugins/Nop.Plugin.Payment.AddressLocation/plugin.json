@@ -1,5 +1,5 @@
 ﻿{
-  "Group": "Payment methods",
+  "Group": "Payment",
   "FriendlyName": "Storing Geolocation",
   "SystemName": "Payment.AddressLocation",
   "Version": "1.00",

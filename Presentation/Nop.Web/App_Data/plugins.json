@@ -84,7 +84,9 @@
       "Version": "1.00"
     }
   ],
-  "PluginNamesToUninstall": [],
+  "PluginNamesToUninstall": [
+    "Payment.AddressLocation"
+  ],
   "PluginNamesToDelete": [],
   "PluginNamesToInstall": []
 }
