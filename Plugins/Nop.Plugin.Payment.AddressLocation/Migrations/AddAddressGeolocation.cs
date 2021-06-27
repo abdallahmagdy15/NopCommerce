@@ -2,9 +2,8 @@
 using Nop.Data.Migrations;
 using Nop.Plugin.Payment.AddressGeolocation.Domains;
 
-namespace Nop.Plugin.MultiFactorAuth.GoogleAuthenticator.Migrations
+namespace Nop.Plugin.Payment.AddressGeolocation.Migrations
 {
-    [SkipMigrationOnUpdate]
     [NopMigration("2021/06/27 12:00:00", "Nop.Plugin.Payment.AddressGeolocation schema")]
     public class AddAddressGeolocation : AutoReversingMigration
     {

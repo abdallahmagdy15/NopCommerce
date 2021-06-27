@@ -28,9 +28,9 @@ namespace Nop.Plugin.Payment.AddressLocation
             return "MapWidget";
         }
 
-        public async Task<IList<string>> GetWidgetZonesAsync()
+        public Task<IList<string>> GetWidgetZonesAsync()
         {
-            return new List<string> { PublicWidgetZones.CheckoutBillingAddressTop };
+            return Task.FromResult<IList<string>>(new List<string> { PublicWidgetZones.CheckoutBillingAddressBottom });
         }
 
         public override Task InstallAsync()

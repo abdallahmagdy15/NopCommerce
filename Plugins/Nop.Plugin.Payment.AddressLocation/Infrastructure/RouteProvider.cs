@@ -16,8 +16,8 @@ namespace Nop.Plugin.MultiFactorAuth.GoogleAuthenticator.Infrastructure
         /// <param name="endpointRouteBuilder">Route builder</param>
         public void RegisterRoutes(IEndpointRouteBuilder endpointRouteBuilder)
         {
-            endpointRouteBuilder.MapControllerRoute("Plugin.Payment.AddressGeolocation.Index", "Plugins/AddressGeolocation/Index",
-                new { controller = "AddressGeolocation", action = "Index"});
+            endpointRouteBuilder.MapControllerRoute("Plugin.Payment.Geolocation.Index", "Plugins/Geolocation/Index",
+                new { controller = "Geolocation", action = "Index"});
         }
 
         /// <summary>

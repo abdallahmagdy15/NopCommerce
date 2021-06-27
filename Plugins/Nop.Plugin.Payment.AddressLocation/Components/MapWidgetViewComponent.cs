@@ -12,7 +12,7 @@ namespace Nop.Plugin.Payment.AddressGeolocation.Components
     {
         public IViewComponentResult Invoke()
         {
-            return View("~/Plugins/Nop.Plugin.Payment.AddressLocation/Views/Geolocation/Index.cshtml");
+            return View("~/Plugins/Payment.AddressLocation/Views/Geolocation/Index.cshtml");
         }
     }
 }
