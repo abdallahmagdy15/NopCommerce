@@ -31,7 +31,7 @@
   },
   "targets": {
     ".NETCoreApp,Version=v5.0": {
-      "Nop.Plugin.Payment.AddressGeolocation/1.0.0": {
+      "Nop.Plugin.Widgets.AddressGeolocation/1.0.0": {
         "dependencies": {
           "Nop.Web.Framework": "4.4.0",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
@@ -319,10 +319,10 @@
           "WindowsBase": "4.0.0.0"
         },
         "runtime": {
-          "Nop.Plugin.Payment.AddressGeolocation.dll": {}
+          "Nop.Plugin.Widgets.AddressGeolocation.dll": {}
         },
         "compile": {
-          "Nop.Plugin.Payment.AddressGeolocation.dll": {}
+          "Nop.Plugin.Widgets.AddressGeolocation.dll": {}
         }
       },
       "AdvancedStringBuilder/0.1.0": {
@@ -5444,7 +5444,7 @@
     }
   },
   "libraries": {
-    "Nop.Plugin.Payment.AddressGeolocation/1.0.0": {
+    "Nop.Plugin.Widgets.AddressGeolocation/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

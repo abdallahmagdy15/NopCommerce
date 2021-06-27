@@ -16,8 +16,6 @@
     <ItemGroup>
       <None Remove="logo.png" />
       <None Remove="plugin.json" />
-      <None Remove="Views\Index.cshtml" />
-      <None Remove="Views\_ViewImports.cshtml" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj" />
@@ -30,12 +28,11 @@
       <Content Include="plugin.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
-      <Content Include="Views\Geolocation\Index.cshtml">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Views\_ViewImports.cshtml">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Components\" />
+      <Folder Include="NewFolder1\" />
+      <Folder Include="NewFolder\" />
     </ItemGroup>
     <!-- This target execute after "Build" target -->
     <Target Name="NopTarget" AfterTargets="Build">

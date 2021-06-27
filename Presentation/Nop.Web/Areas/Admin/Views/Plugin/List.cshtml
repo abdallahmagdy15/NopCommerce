@@ -12,7 +12,11 @@
     const string hideSearchBlockAttributeName = "LocaLPluginsPage.HideSearchBlock";
     var hideSearchBlock = await genericAttributeService.GetAttributeAsync<bool>(await workContext.GetCurrentCustomerAsync(), hideSearchBlockAttributeName);
 }
-
+<style>
+    td.text-center img {
+        max-width: 60px
+    }
+</style>
 <form asp-controller="Plugin" asp-action="List" id="plugins-form-local">
     <div class="content-header clearfix">
         <h1 class="float-left">
