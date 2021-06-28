@@ -78,10 +78,6 @@
     {
       "SystemName": "ExternalAuth.Facebook",
       "Version": "1.68"
-    },
-    {
-      "SystemName": "Payment.AddressLocation",
-      "Version": "2.00"
     }
   ],
   "PluginNamesToUninstall": [],
