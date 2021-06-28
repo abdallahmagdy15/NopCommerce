@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Nop.Web.Framework.Components;
 
-namespace Nop.Plugin.Payment.AddressGeolocation.Components
+namespace Nop.Plugin.Widgets.Map.Components
 { 
     class MapWidgetViewComponent : NopViewComponent
     {
         public IViewComponentResult Invoke()
         {
-            return View("~/Plugins/Payment.AddressLocation/Views/Geolocation/Index.cshtml");
+            return View("~/Plugins/Widgets.Map/Views/Map/Index.cshtml");
         }
     }
 }

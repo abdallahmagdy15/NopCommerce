@@ -5,12 +5,12 @@ using Nop.Services.Cms;
 using Nop.Services.Plugins;
 using Nop.Web.Framework.Infrastructure;
 
-namespace Nop.Plugin.Payment.AddressLocation
+namespace Nop.Plugin.Widgets.Map
 {
-    public class AddressGeolocationPlugin : BasePlugin,IWidgetPlugin
+    public class MapPlugin : BasePlugin, IWidgetPlugin
     {
         private readonly IWebHelper _webHelper;
-        public AddressGeolocationPlugin(IWebHelper webHelper)
+        public MapPlugin(IWebHelper webHelper)
         {
             _webHelper = webHelper;
         }
@@ -19,7 +19,7 @@ namespace Nop.Plugin.Payment.AddressLocation
 
         public override string GetConfigurationPageUrl()
         {
-            return $"{_webHelper.GetStoreLocation()}Admin/AddressGeolocation/Configure";
+            return $"{_webHelper.GetStoreLocation()}Admin/Map/Configure";
         }
 
         public string GetWidgetViewComponentName(string widgetZone)
@@ -29,7 +29,7 @@ namespace Nop.Plugin.Payment.AddressLocation
 
         public Task<IList<string>> GetWidgetZonesAsync()
         {
-            return Task.FromResult<IList<string>>(new List<string> { PublicWidgetZones.HomepageTop });
+            return Task.FromResult<IList<string>>(new List<string> { PublicWidgetZones.HomepageBeforeNews });
         }
 
         public override Task InstallAsync()

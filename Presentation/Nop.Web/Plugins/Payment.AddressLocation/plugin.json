@@ -2,7 +2,7 @@
   "Group": "Payment",
   "FriendlyName": "Storing Geolocation",
   "SystemName": "Payment.AddressLocation",
-  "Version": "1.00",
+  "Version": "2.00",
   "SupportedVersions": [ "4.40" ],
   "Author": "excp team",
   "DisplayOrder": 1,

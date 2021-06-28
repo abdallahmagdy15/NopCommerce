@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
-using Nop.Web.Framework;
 using Nop.Web.Framework.Mvc.Routing;
 
-namespace Nop.Plugin.MultiFactorAuth.GoogleAuthenticator.Infrastructure
+namespace Nop.Plugin.Widgets.Map.Infrastructure
 {
     /// <summary>
     /// Represents plugin route provider
@@ -16,8 +15,8 @@ namespace Nop.Plugin.MultiFactorAuth.GoogleAuthenticator.Infrastructure
         /// <param name="endpointRouteBuilder">Route builder</param>
         public void RegisterRoutes(IEndpointRouteBuilder endpointRouteBuilder)
         {
-            endpointRouteBuilder.MapControllerRoute("Plugin.Payment.AddressGeolocation.Geolocation.Index", "Plugins/Geolocation/Index",
-                new { controller = "Geolocation", action = "Index"});
+            endpointRouteBuilder.MapControllerRoute("Plugin.Map.Index", "Plugins/Map/Index",
+                new { controller = "Map", action = "Index"});
         }
 
         /// <summary>
