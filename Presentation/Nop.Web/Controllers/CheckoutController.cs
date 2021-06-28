@@ -501,6 +501,13 @@ namespace Nop.Web.Controllers
         [FormValueRequired("nextstep")]
         public virtual async Task<IActionResult> NewBillingAddress(CheckoutBillingAddressModel model, IFormCollection form)
         {
+            //set default static country and state providence
+            //
+            model.BillingNewAddress.CountryId = 196;
+            model.BillingNewAddress.StateProvinceId = 1515;
+            //
+            //
+
             //validation
             if (_orderSettings.CheckoutDisabled)
                 return RedirectToRoute("ShoppingCart");
@@ -1308,6 +1315,12 @@ namespace Nop.Web.Controllers
         [IgnoreAntiforgeryToken]
         public virtual async Task<IActionResult> OpcSaveBilling(CheckoutBillingAddressModel model, IFormCollection form)
         {
+            //set default static country and state providence
+            //
+            model.BillingNewAddress.CountryId = 196;
+            model.BillingNewAddress.StateProvinceId = 1515;
+            //
+            //
             try
             {
                 //validation
