@@ -4,7 +4,7 @@ using Nop.Web.Framework.Components;
 namespace Nop.Plugin.Widgets.Map.Components
 {
     [ViewComponent(Name = "WidgetsMap")]
-    class WidgetsMapViewComponent : NopViewComponent
+    public class WidgetsMapViewComponent : NopViewComponent
     {
         public IViewComponentResult Invoke()
         {
