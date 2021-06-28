@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Widgets",
+  "FriendlyName": "Storing Geolocation from Map",
+  "SystemName": "Widgets.Map",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.40" ],
+  "Author": "excp team",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Widgets.Map.dll",
+  "Description": "This plugin allows to store billing/pickup/shipment address geolocation by specifing a location on the google map"
+}

@@ -19,17 +19,17 @@ namespace Nop.Plugin.Widgets.Map
 
         public override string GetConfigurationPageUrl()
         {
-            return $"{_webHelper.GetStoreLocation()}Admin/Map/Configure";
+            return $"{_webHelper.GetStoreLocation()}Admin/WidgetsMap/Configure";
         }
 
         public string GetWidgetViewComponentName(string widgetZone)
         {
-            return "MapWidget";
+            return "WidgetsMap";
         }
 
         public Task<IList<string>> GetWidgetZonesAsync()
         {
-            return Task.FromResult<IList<string>>(new List<string> { PublicWidgetZones.HomepageBeforeNews });
+            return Task.FromResult<IList<string>>(new List<string> { PublicWidgetZones.HomepageTop });
         }
 
         public override Task InstallAsync()

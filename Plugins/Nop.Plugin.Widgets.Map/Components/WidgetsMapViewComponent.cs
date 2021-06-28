@@ -3,7 +3,8 @@ using Nop.Web.Framework.Components;
 
 namespace Nop.Plugin.Widgets.Map.Components
 {
-    class MapWidgetViewComponent : NopViewComponent
+    [ViewComponent(Name = "WidgetsMap")]
+    class WidgetsMapViewComponent : NopViewComponent
     {
         public IViewComponentResult Invoke()
         {
