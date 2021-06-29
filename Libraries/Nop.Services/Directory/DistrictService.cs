@@ -12,25 +12,25 @@ namespace Nop.Services.Directory
     /// <summary>
     /// State province service
     /// </summary>
-    public partial class CityService : ICityService
+    public partial class DistrictService : IDistrictService
     {
         #region Fields
 
         private readonly IStaticCacheManager _staticCacheManager;
         private readonly ILocalizationService _localizationService;
-        private readonly IRepository<City> _cityRepository;
+        private readonly IRepository<District> _districtRepository;
 
         #endregion
 
         #region Ctor
 
-        public CityService(IStaticCacheManager staticCacheManager,
+        public DistrictService(IStaticCacheManager staticCacheManager,
             ILocalizationService localizationService,
-            IRepository<City> cityRepository)
+            IRepository<District> districtRepository)
         {
             _staticCacheManager = staticCacheManager;
             _localizationService = localizationService;
-            _cityRepository = cityRepository;
+            _districtRepository = districtRepository;
         }
 
         #endregion
@@ -39,24 +39,24 @@ namespace Nop.Services.Directory
         /// <summary>
         /// Deletes a state/province
         /// </summary>
-        /// <param name="city">The state/province</param>
+        /// <param name="district">The state/province</param>
         /// <returns>A task that represents the asynchronous operation</returns>
-        public virtual async Task DeleteCityAsync(City city)
+        public virtual async Task DeleteDistrictAsync(District district)
         {
-            await _cityRepository.DeleteAsync(city);
+            await _districtRepository.DeleteAsync(district);
         }
 
         /// <summary>
         /// Gets a state/province
         /// </summary>
-        /// <param name="cityId">The state/province identifier</param>
+        /// <param name="districtId">The state/province identifier</param>
         /// <returns>
         /// A task that represents the asynchronous operation
         /// The task result contains the state/province
         /// </returns>
-        public virtual async Task<City> GetCityByIdAsync(int cityId)
+        public virtual async Task<District> GetDistrictByIdAsync(int districtId)
         {
-            return await _cityRepository.GetByIdAsync(cityId, cache => default);
+            return await _districtRepository.GetByIdAsync(districtId, cache => default);
         }
 
 
@@ -69,9 +69,9 @@ namespace Nop.Services.Directory
         /// A task that represents the asynchronous operation
         /// The task result contains the country
         /// </returns>
-        public virtual async Task<City> GetCityByAddressAsync(Address address)
+        public virtual async Task<District> GetDistrictByAddressAsync(Address address)
         {
-            return await GetCityByIdAsync(address?.CityId ?? 0);
+            return await GetDistrictByIdAsync(address?.DistrictId ?? 0);
         }
 
         /// <summary>
@@ -82,15 +82,15 @@ namespace Nop.Services.Directory
         /// A task that represents the asynchronous operation
         /// The task result contains the states
         /// </returns>
-        public virtual async Task<IList<City>> GetCitiesAsync(bool showHidden = false)
+        public virtual async Task<IList<District>> GetDistrictsAsync(bool showHidden = false)
         {
-            var query = from sp in _cityRepository.Table
-                        orderby sp.StateProvinceId, sp.DisplayOrder, sp.Name
-                        where showHidden || sp.Published
+            var query = from sp in _districtRepository.Table
+                        orderby sp.CityId, sp.Name
+                        where showHidden
                         select sp;
 
 
-            //var citys = await _staticCacheManager.GetAsync(_staticCacheManager.PrepareKeyForDefaultCache(NopDirectoryDefaults.CitiesAllCacheKey, showHidden), async () => await query.ToListAsync());
+            //var districts = await _staticCacheManager.GetAsync(_staticCacheManager.PrepareKeyForDefaultCache(NopDirectoryDefaults.DistrictsAllCacheKey, showHidden), async () => await query.ToListAsync());
 
             return await query.ToListAsync();
         }
@@ -98,40 +98,39 @@ namespace Nop.Services.Directory
         /// <summary>
         /// Inserts a state/province
         /// </summary>
-        /// <param name="city">State/province</param>
+        /// <param name="district">State/province</param>
         /// <returns>A task that represents the asynchronous operation</returns>
-        public virtual async Task InsertCityAsync(City city)
+        public virtual async Task InsertDistrictAsync(District district)
         {
-            await _cityRepository.InsertAsync(city);
+            await _districtRepository.InsertAsync(district);
         }
 
         /// <summary>
         /// Updates a state/province
         /// </summary>
-        /// <param name="city">State/province</param>
+        /// <param name="district">State/province</param>
         /// <returns>A task that represents the asynchronous operation</returns>
-        public virtual async Task UpdateCityAsync(City city)
+        public virtual async Task UpdateDistrictAsync(District district)
         {
-            await _cityRepository.UpdateAsync(city);
+            await _districtRepository.UpdateAsync(district);
         }
 
-        public async Task<IList<City>> GetCitiesByStateProvinceIdAsync(int stateProvinceId, int languageId = 0, bool showHidden = false)
+        public async Task<IList<District>> GetDistrictsByCityIdAsync(int cityId, int languageId = 0, bool showHidden = false)
         {
-            var query = from sp in _cityRepository.Table
-                        orderby sp.DisplayOrder, sp.Name
-                        where sp.StateProvinceId == stateProvinceId &&
-                        (showHidden || sp.Published)
+            var query = from sp in _districtRepository.Table
+                        orderby sp.DisplayOrder,sp.Name
+                        where sp.CityId== cityId && showHidden
                         select sp;
-            var cities = await query.ToListAsync();
+            var districts = await query.ToListAsync();
 
             if (languageId > 0)
                 //we should sort states by localized names when they have the same display order
-                cities = await cities.ToAsyncEnumerable()
+                districts = await districts.ToAsyncEnumerable()
                     .OrderBy(c => c.DisplayOrder)
                     .ThenByAwait(async c => await _localizationService.GetLocalizedAsync(c, x => x.Name, languageId))
                     .ToListAsync();
 
-            return cities;
+            return districts;
         }
 
         #endregion

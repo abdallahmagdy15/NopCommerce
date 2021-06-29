@@ -6,6 +6,10 @@ namespace Nop.Core.Domain.Directory
     {
         public int CityId { get; set; }
         public string Name { get; set; }
+        /// <summary>
+        /// Gets or sets the display order
+        /// </summary>
+        public int DisplayOrder { get; set; }
 
     }
 }
