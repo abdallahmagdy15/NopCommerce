@@ -31,6 +31,7 @@ namespace Nop.Web.Factories
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly ILocalizationService _localizationService;
         private readonly IStateProvinceService _stateProvinceService;
+        private readonly IDistrictService _districtService;
 
         #endregion
 
@@ -43,7 +44,9 @@ namespace Nop.Web.Factories
             ICountryService countryService,
             IGenericAttributeService genericAttributeService,
             ILocalizationService localizationService,
-            IStateProvinceService stateProvinceService)
+            IStateProvinceService stateProvinceService,
+            IDistrictService districtService
+            )
         {
             _addressSettings = addressSettings;
             _addressAttributeFormatter = addressAttributeFormatter;
@@ -53,6 +56,7 @@ namespace Nop.Web.Factories
             _genericAttributeService = genericAttributeService;
             _localizationService = localizationService;
             _stateProvinceService = stateProvinceService;
+            _districtService = districtService;
         }
 
         #endregion
@@ -163,6 +167,7 @@ namespace Nop.Web.Factories
         /// <param name="excludeProperties">Whether to exclude populating of model properties from the entity</param>
         /// <param name="addressSettings">Address settings</param>
         /// <param name="loadCountries">Countries loading function; pass null if countries do not need to load</param>
+        /// <param name="loadCities">Cities loading function; pass null if countries do not need to load</param>
         /// <param name="prePopulateWithCustomerFields">Whether to populate model properties with the customer fields (used with the customer entity)</param>
         /// <param name="customer">Customer entity; required if prePopulateWithCustomerFields is true</param>
         /// <param name="overrideAttributesXml">Overridden address attributes in XML format; pass null to use CustomAttributes of the address entity</param>
@@ -171,6 +176,7 @@ namespace Nop.Web.Factories
             Address address, bool excludeProperties,
             AddressSettings addressSettings,
             Func<Task<IList<Country>>> loadCountries = null,
+            Func<Task<IList<Country>>> loadCities = null,
             bool prePopulateWithCustomerFields = false,
             Customer customer = null,
             string overrideAttributesXml = "")
@@ -274,8 +280,57 @@ namespace Nop.Web.Factories
                 }
             }
 
+            //cities and districts
+            var cities = await loadCities();
 
+            if (cities.Count == 1)
+            {
+                model.CityId = cities[0].Id;
+            }
+            else
+            {
+                model.AvailableCities.Add(new SelectListItem { Text = await _localizationService.GetResourceAsync("Address.SelectCity"), Value = "0" });
+            }
 
+            foreach (var c in cities)
+            {
+                model.AvailableCities.Add(new SelectListItem
+                {
+                    Text = await _localizationService.GetLocalizedAsync(c, x => x.Name),
+                    Value = c.Id.ToString(),
+                    Selected = c.Id == model.CityId
+                });
+            }
+            //******
+            var _languageId = (await EngineContext.Current.Resolve<IWorkContext>().GetWorkingLanguageAsync()).Id;
+            var districts = (await _districtService
+                .GetDistrictsByCityIdAsync(model.CityId ?? 0, _languageId))
+                .ToList();
+            if (districts.Any())
+            {
+                model.AvailableDistricts.Add(new SelectListItem { Text = await _localizationService.GetResourceAsync("Address.SelectDistrict"), Value = "0" });
+
+                foreach (var s in districts)
+                {
+                    model.AvailableDistricts.Add(new SelectListItem
+                    {
+                        Text = await _localizationService.GetLocalizedAsync(s, x => x.Name),
+                        Value = s.Id.ToString(),
+                        Selected = (s.Id == model.DistrictId)
+                    });
+                }
+            }
+            else
+            {
+                var anyCitySelected = model.AvailableCities.Any(x => x.Selected);
+                model.AvailableDistricts.Add(new SelectListItem
+                {
+                    Text = await _localizationService.GetResourceAsync(anyCitySelected ? "Address.Other" : "Address.SelectDistrict"),
+                    Value = "0"
+                });
+            }
+            //end cities and districts
+            //
             //form fields
             model.CompanyEnabled = addressSettings.CompanyEnabled;
             model.CompanyRequired = addressSettings.CompanyRequired;
