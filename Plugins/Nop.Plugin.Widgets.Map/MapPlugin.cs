@@ -29,7 +29,7 @@ namespace Nop.Plugin.Widgets.Map
 
         public Task<IList<string>> GetWidgetZonesAsync()
         {
-            return Task.FromResult<IList<string>>(new List<string> { PublicWidgetZones.OpCheckoutBillingAddressTop });
+            return Task.FromResult<IList<string>>(new List<string> { PublicWidgetZones.OpCheckoutBillingAddressMiddle });
         }
 
         public override Task InstallAsync()
