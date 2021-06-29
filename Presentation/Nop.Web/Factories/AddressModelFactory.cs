@@ -274,6 +274,8 @@ namespace Nop.Web.Factories
                 }
             }
 
+
+
             //form fields
             model.CompanyEnabled = addressSettings.CompanyEnabled;
             model.CompanyRequired = addressSettings.CompanyRequired;
