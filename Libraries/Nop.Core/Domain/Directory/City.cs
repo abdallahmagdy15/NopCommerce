@@ -1,6 +1,8 @@
-﻿namespace Nop.Core.Domain.Directory
+﻿using Nop.Core.Domain.Localization;
+
+namespace Nop.Core.Domain.Directory
 {
-    public class City : BaseEntity
+    public class City : BaseEntity, ILocalizedEntity
     {
         /// <summary>
         /// Gets or sets the StateProvince identifier

@@ -28,17 +28,6 @@ namespace Nop.Services.Directory
         Task<City> GetCityByIdAsync(int cityId);
 
         /// <summary>
-        /// Gets a state/province by abbreviation
-        /// </summary>
-        /// <param name="abbreviation">The state/province abbreviation</param>
-        /// <param name="countryId">Country identifier; pass null to load the state regardless of a country</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the state/province
-        /// </returns>
-        Task<City> GetCityByAbbreviationAsync(string abbreviation, int? countryId = null);
-
-        /// <summary>
         /// Gets a state/province by address 
         /// </summary>
         /// <param name="address">Address</param>
@@ -58,7 +47,7 @@ namespace Nop.Services.Directory
         /// A task that represents the asynchronous operation
         /// The task result contains the states
         /// </returns>
-        Task<IList<City>> GetCitysByCountryIdAsync(int countryId, int languageId = 0, bool showHidden = false);
+        Task<IList<City>> GetCitiesByStateProvinceIdAsync(int stateProvinceId, int languageId = 0, bool showHidden = false);
 
         /// <summary>
         /// Gets all states/provinces
@@ -68,7 +57,7 @@ namespace Nop.Services.Directory
         /// A task that represents the asynchronous operation
         /// The task result contains the states
         /// </returns>
-        Task<IList<City>> GetCitysAsync(bool showHidden = false);
+        Task<IList<City>> GetCitiesAsync(bool showHidden = false);
 
         /// <summary>
         /// Inserts a state/province

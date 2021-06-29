@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/Nop.Web",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:65283/",
       "sslPort": 44369
