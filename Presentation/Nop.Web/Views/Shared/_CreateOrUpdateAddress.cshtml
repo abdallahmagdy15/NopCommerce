@@ -72,18 +72,41 @@
             <span asp-validation-for="County"></span>
         </div>
     }
-    @if (Model.CityEnabled)
-    {
-        <div class="inputs">
-            <label asp-for="City" asp-postfix=":"></label>
-            <input asp-for="City" />
-            @if (Model.CityRequired)
-            {
-                <nop-required />
-            }
-            <span asp-validation-for="City"></span>
-        </div>
-    }
+
+    @*@if (Model.CityEnabled)
+        {
+            <div class="inputs">
+                <label asp-for="City" asp-postfix=":"></label>
+                <input asp-for="City" />
+                @if (Model.CityRequired)
+                {
+                    <nop-required />
+                }
+                <span asp-validation-for="City"></span>
+            </div>
+        }*@
+
+    @* **City input dropdown** *@
+    <div class="inputs">
+        <label asp-for="CityId" asp-postfix=":"></label>
+        <select asp-for="CityId" asp-items="Model.AvailableCities"
+                data-trigger="city-select"
+                data-url="@(Url.RouteUrl("GetDistrictsByCityId"))"
+                data-district="#@Html.IdFor(model => model.DistrictId)"
+                data-loading="#district-loading-progress"></select>
+        <span asp-validation-for="CityId"></span>
+    </div>
+    @* **District input dropdown** *@
+    <div class="inputs">
+        <label asp-for="DistrictId" asp-postfix=":"></label>
+        <select asp-for="DistrictId" asp-items="Model.AvailableDistricts"
+                    data-trigger="district-select">
+            </select>
+            <span id="district-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait")</span>*@
+        <span asp-validation-for="DistrictId"></span>
+    </div>
+    @* **end** *@
+
     @if (Model.StreetAddressEnabled)
     {
         <div class="inputs">
