@@ -52,6 +52,8 @@ namespace Nop.Web.Factories
         private readonly IAddressModelFactory _addressModelFactory;
         private readonly IAuthenticationPluginManager _authenticationPluginManager;
         private readonly ICountryService _countryService;
+        private readonly ICityService _cityService;
+
         private readonly ICustomerAttributeParser _customerAttributeParser;
         private readonly ICustomerAttributeService _customerAttributeService;
         private readonly ICustomerService _customerService;
@@ -94,6 +96,7 @@ namespace Nop.Web.Factories
             IAddressModelFactory addressModelFactory,
             IAuthenticationPluginManager authenticationPluginManager,
             ICountryService countryService,
+            ICityService cityService,
             ICustomerAttributeParser customerAttributeParser,
             ICustomerAttributeService customerAttributeService,
             ICustomerService customerService,
@@ -157,6 +160,7 @@ namespace Nop.Web.Factories
             _securitySettings = securitySettings;
             _taxSettings = taxSettings;
             _vendorSettings = vendorSettings;
+            _cityService = cityService;
         }
 
         #endregion
@@ -751,7 +755,9 @@ namespace Nop.Web.Factories
                     address: address,
                     excludeProperties: false,
                     addressSettings: _addressSettings,
-                    loadCountries: async () => await _countryService.GetAllCountriesAsync((await _workContext.GetWorkingLanguageAsync()).Id));
+                    loadCountries: async () => await _countryService.GetAllCountriesAsync((await _workContext.GetWorkingLanguageAsync()).Id),
+                      loadCities: async () => await _cityService.GetCitiesAsync(true)
+                    );
                 model.Addresses.Add(addressModel);
             }
             return model;

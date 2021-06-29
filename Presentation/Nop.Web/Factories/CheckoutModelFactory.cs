@@ -34,6 +34,8 @@ namespace Nop.Web.Factories
         private readonly IAddressModelFactory _addressModelFactory;
         private readonly IAddressService _addressService;
         private readonly ICountryService _countryService;
+        private readonly ICityService _cityService;
+
         private readonly ICurrencyService _currencyService;
         private readonly ICustomerService _customerService;
         private readonly IGenericAttributeService _genericAttributeService;
@@ -67,6 +69,7 @@ namespace Nop.Web.Factories
             IAddressModelFactory addressModelFactory,
             IAddressService addressService,
             ICountryService countryService,
+            ICityService cityService,
             ICurrencyService currencyService,
             ICustomerService customerService,
             IGenericAttributeService genericAttributeService,
@@ -96,6 +99,7 @@ namespace Nop.Web.Factories
             _addressModelFactory = addressModelFactory;
             _addressService = addressService;
             _countryService = countryService;
+            _cityService = cityService;
             _currencyService = currencyService;
             _customerService = customerService;
             _genericAttributeService = genericAttributeService;
@@ -276,6 +280,7 @@ namespace Nop.Web.Factories
                 excludeProperties: false,
                 addressSettings: _addressSettings,
                 loadCountries: async () => await _countryService.GetAllCountriesForBillingAsync((await _workContext.GetWorkingLanguageAsync()).Id),
+                loadCities: async () => await _cityService.GetCitiesAsync(true),
                 prePopulateWithCustomerFields: prePopulateNewAddressWithCustomerFields,
                 customer: await _workContext.GetCurrentCustomerAsync(),
                 overrideAttributesXml: overrideAttributesXml);
