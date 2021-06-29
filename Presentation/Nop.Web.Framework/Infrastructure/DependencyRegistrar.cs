@@ -213,6 +213,7 @@ namespace Nop.Web.Framework.Infrastructure
             services.AddScoped<IReviewTypeService, ReviewTypeService>();
             services.AddSingleton<IEventPublisher, EventPublisher>();
             services.AddScoped<ISettingService, SettingService>();
+            services.AddScoped<ICityService, CityService>();
 
             //plugin managers
             services.AddScoped(typeof(IPluginManager<>), typeof(PluginManager<>));
