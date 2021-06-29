@@ -18,6 +18,6 @@ namespace Nop.Web.Factories
         /// A task that represents the asynchronous operation
         /// The task result contains the list of identifiers and names of districts
         /// </returns>
-        Task<IList<StateProvinceModel>> GetDistrictsByCityIdAsync(string cityId, bool addSelectDistrictItem);
+        Task<IList<DistrictModel>> GetDistrictsByCityIdAsync(string cityId, bool addSelectDistrictItem);
     }
 }

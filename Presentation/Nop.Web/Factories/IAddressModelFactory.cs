@@ -29,6 +29,7 @@ namespace Nop.Web.Factories
             Address address, bool excludeProperties,
             AddressSettings addressSettings,
             Func<Task<IList<Country>>> loadCountries = null,
+            Func<Task<IList<City>>> loadCities = null,
             bool prePopulateWithCustomerFields = false,
             Customer customer = null,
             string overrideAttributesXml = "");

@@ -63,6 +63,7 @@ namespace Nop.Web.Controllers
         private readonly IAddressService _addressService;
         private readonly IAuthenticationService _authenticationService;
         private readonly ICountryService _countryService;
+        private readonly ICityService _cityService;
         private readonly ICurrencyService _currencyService;
         private readonly ICustomerActivityService _customerActivityService;
         private readonly ICustomerAttributeParser _customerAttributeParser;
@@ -112,6 +113,7 @@ namespace Nop.Web.Controllers
             IAddressService addressService,
             IAuthenticationService authenticationService,
             ICountryService countryService,
+            ICityService cityService,
             ICurrencyService currencyService,
             ICustomerActivityService customerActivityService,
             ICustomerAttributeParser customerAttributeParser,
@@ -157,6 +159,7 @@ namespace Nop.Web.Controllers
             _addressService = addressService;
             _authenticationService = authenticationService;
             _countryService = countryService;
+            _cityService = cityService;
             _currencyService = currencyService;
             _customerActivityService = customerActivityService;
             _customerAttributeParser = customerAttributeParser;
@@ -1449,7 +1452,8 @@ namespace Nop.Web.Controllers
                 address: null,
                 excludeProperties: false,
                 addressSettings: _addressSettings,
-                loadCountries: async () => await _countryService.GetAllCountriesAsync((await _workContext.GetWorkingLanguageAsync()).Id));
+                loadCountries: async () => await _countryService.GetAllCountriesAsync((await _workContext.GetWorkingLanguageAsync()).Id),
+                 loadCities: async () => await _cityService.GetCitiesAsync(true));
 
             return View(model);
         }
@@ -1493,7 +1497,8 @@ namespace Nop.Web.Controllers
                 excludeProperties: true,
                 addressSettings: _addressSettings,
                 loadCountries: async () => await _countryService.GetAllCountriesAsync((await _workContext.GetWorkingLanguageAsync()).Id),
-                overrideAttributesXml: customAttributes);
+                loadCities: async () => await _cityService.GetCitiesAsync(true),
+            overrideAttributesXml: customAttributes);
 
             return View(model);
         }
@@ -1515,7 +1520,7 @@ namespace Nop.Web.Controllers
                 address: address,
                 excludeProperties: false,
                 addressSettings: _addressSettings,
-                loadCountries: async () => await _countryService.GetAllCountriesAsync((await _workContext.GetWorkingLanguageAsync()).Id));
+                loadCountries: async () => await _countryService.GetAllCountriesAsync((await _workContext.GetWorkingLanguageAsync()).Id),loadCities: async () => await _cityService.GetCitiesAsync(true));
 
             return View(model);
         }
@@ -1556,7 +1561,8 @@ namespace Nop.Web.Controllers
                 excludeProperties: true,
                 addressSettings: _addressSettings,
                 loadCountries: async () => await _countryService.GetAllCountriesAsync((await _workContext.GetWorkingLanguageAsync()).Id),
-                overrideAttributesXml: customAttributes);
+                loadCities: async () => await _cityService.GetCitiesAsync(true),
+            overrideAttributesXml: customAttributes);
 
             return View(model);
         }
