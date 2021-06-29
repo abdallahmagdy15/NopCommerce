@@ -279,55 +279,57 @@ namespace Nop.Web.Factories
                     }
                 }
             }
-
-            //cities and districts
-            var cities = await loadCities();
-
-            if (cities.Count == 1)
+            if (loadCities != null)
             {
-                model.CityId = cities[0].Id;
-            }
-            else
-            {
-                model.AvailableCities.Add(new SelectListItem { Text = await _localizationService.GetResourceAsync("Address.SelectCity"), Value = "0" });
-            }
+                //cities and districts
+                var cities = await loadCities();
 
-            foreach (var c in cities)
-            {
-                model.AvailableCities.Add(new SelectListItem
+                if (cities.Count == 1)
                 {
-                    Text = await _localizationService.GetLocalizedAsync(c, x => x.Name),
-                    Value = c.Id.ToString(),
-                    Selected = c.Id == model.CityId
-                });
-            }
-            //******
-            var _languageId = (await EngineContext.Current.Resolve<IWorkContext>().GetWorkingLanguageAsync()).Id;
-            var districts = (await _districtService
-                .GetDistrictsByCityIdAsync(model.CityId ?? 0, _languageId))
-                .ToList();
-            if (districts.Any())
-            {
-                model.AvailableDistricts.Add(new SelectListItem { Text = await _localizationService.GetResourceAsync("Address.SelectDistrict"), Value = "0" });
-
-                foreach (var s in districts)
+                    model.CityId = cities[0].Id;
+                }
+                else
                 {
-                    model.AvailableDistricts.Add(new SelectListItem
+                    model.AvailableCities.Add(new SelectListItem { Text = await _localizationService.GetResourceAsync("Address.SelectCity"), Value = "0" });
+                }
+
+                foreach (var c in cities)
+                {
+                    model.AvailableCities.Add(new SelectListItem
                     {
-                        Text = await _localizationService.GetLocalizedAsync(s, x => x.Name),
-                        Value = s.Id.ToString(),
-                        Selected = (s.Id == model.DistrictId)
+                        Text = await _localizationService.GetLocalizedAsync(c, x => x.Name),
+                        Value = c.Id.ToString(),
+                        Selected = c.Id == model.CityId
                     });
                 }
-            }
-            else
-            {
-                var anyCitySelected = model.AvailableCities.Any(x => x.Selected);
-                model.AvailableDistricts.Add(new SelectListItem
+                //******
+                var _languageId = (await EngineContext.Current.Resolve<IWorkContext>().GetWorkingLanguageAsync()).Id;
+                var districts = (await _districtService
+                    .GetDistrictsByCityIdAsync(model.CityId ?? 0, _languageId))
+                    .ToList();
+                if (districts.Any())
                 {
-                    Text = await _localizationService.GetResourceAsync(anyCitySelected ? "Address.Other" : "Address.SelectDistrict"),
-                    Value = "0"
-                });
+                    model.AvailableDistricts.Add(new SelectListItem { Text = await _localizationService.GetResourceAsync("Address.SelectDistrict"), Value = "0" });
+
+                    foreach (var s in districts)
+                    {
+                        model.AvailableDistricts.Add(new SelectListItem
+                        {
+                            Text = await _localizationService.GetLocalizedAsync(s, x => x.Name),
+                            Value = s.Id.ToString(),
+                            Selected = (s.Id == model.DistrictId)
+                        });
+                    }
+                }
+                else
+                {
+                    var anyCitySelected = model.AvailableCities.Any(x => x.Selected);
+                    model.AvailableDistricts.Add(new SelectListItem
+                    {
+                        Text = await _localizationService.GetResourceAsync(anyCitySelected ? "Address.Other" : "Address.SelectDistrict"),
+                        Value = "0"
+                    });
+                }
             }
             //end cities and districts
             //
