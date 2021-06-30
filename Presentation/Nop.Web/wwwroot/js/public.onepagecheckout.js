@@ -111,7 +111,7 @@ var Billing = {
   disableBillingAddressCheckoutStep: false,
   guest: false,
   selectedStateId: 0,
-
+  selectedDistrictId: 0,
   init: function(form, saveUrl, disableBillingAddressCheckoutStep, guest) {
     this.form = form;
     this.saveUrl = saveUrl;

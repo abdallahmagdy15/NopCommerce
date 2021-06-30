@@ -55,15 +55,16 @@ namespace Nop.Web.Factories
                 throw new ArgumentNullException(nameof(cityId));
 
             var city = await _cityService.GetCityByIdAsync(Convert.ToInt32(cityId));
-            var states = (await _districtService
+            var districts = (await _districtService
                 .GetDistrictsByCityIdAsync(city?.Id ?? 0, (await _workContext.GetWorkingLanguageAsync()).Id))
                 .ToList();
             var result = new List<DistrictModel>();
-            foreach (var state in states)
+            foreach (var district in districts)
                 result.Add(new DistrictModel
                 {
-                    id = state.Id,
-                    name = await _localizationService.GetLocalizedAsync(state, x => x.Name)
+                    id = district.Id,
+                   //name = await _localizationService.GetLocalizedAsync(state, x => x.Name)
+                   name = district.Name
                 });
 
             if (city == null)
@@ -74,7 +75,8 @@ namespace Nop.Web.Factories
                     result.Insert(0, new DistrictModel
                     {
                         id = 0,
-                        name = await _localizationService.GetResourceAsync("Address.SelectDistrict")
+                        //name = await _localizationService.GetResourceAsync("Address.SelectDistrict")
+                        name="Select District"
                     });
                 }
                 else
@@ -100,14 +102,16 @@ namespace Nop.Web.Factories
                 }
                 else
                 {
-                    //city has some states
+                    //city has some districts
                     if (addSelectDistrictItem)
                     {
                         result.Insert(0, new DistrictModel
                         {
                             id = 0,
-                            name = await _localizationService.GetResourceAsync("Address.SelectDistrict")
+                            //name = await _localizationService.GetResourceAsync("Address.SelectDistrict")
+                            name = "Select District"
                         });
+                        ;
                     }
                 }
             }

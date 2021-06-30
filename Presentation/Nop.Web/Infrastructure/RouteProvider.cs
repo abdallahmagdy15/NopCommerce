@@ -470,6 +470,11 @@ namespace Nop.Web.Infrastructure
                 pattern: $"country/getstatesbycountryid/",
                 defaults: new { controller = "Country", action = "GetStatesByCountryId" });
 
+            //get District list by City ID (AJAX)
+            endpointRouteBuilder.MapControllerRoute(name: "GetDistrictsByCityId",
+                pattern: $"city/getdistrictsbycityid/",
+                defaults: new { controller = "City", action = "GetDistrictsByCityId" });
+
             //EU Cookie law accept button handler (AJAX)
             endpointRouteBuilder.MapControllerRoute(name: "EuCookieLawAccept",
                 pattern: $"eucookielawaccept",

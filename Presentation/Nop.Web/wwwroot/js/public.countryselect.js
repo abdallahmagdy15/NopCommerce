@@ -1,6 +1,8 @@
 ﻿/*
 ** nopCommerce country select js functions
 */
+console.log("countryselect script loaded");////////log
+
 +function ($) {
     'use strict';
     if ('undefined' == typeof (jQuery)) {

@@ -43,11 +43,11 @@ namespace Nop.Web.Models.Common
         public int? StateProvinceId { get; set; }
         [NopResourceDisplayName("Address.Fields.StateProvince")]
         public string StateProvinceName { get; set; }
-
+        [NopResourceDisplayName("City")]
         public int? CityId { get; set; }
         [NopResourceDisplayName("City")]
         public string CityName { get; set; }
-
+        [NopResourceDisplayName("District")]
         public int? DistrictId { get; set; }
         [NopResourceDisplayName("District")]
         public string DistrictName { get; set; }

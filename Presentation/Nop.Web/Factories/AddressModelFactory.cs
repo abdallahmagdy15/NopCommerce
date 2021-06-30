@@ -290,17 +290,21 @@ namespace Nop.Web.Factories
                 }
                 else
                 {
-                    model.AvailableCities.Add(new SelectListItem { Text = await _localizationService.GetResourceAsync("Address.SelectCity"), Value = "0" });
+                    model.AvailableCities.Add(new SelectListItem {
+                        //Text = await _localizationService.GetResourceAsync("Select City"), Value = "0"
+                        Text = "Select City", Value = "0"
+                    });
                 }
 
                 foreach (var c in cities)
                 {
                     model.AvailableCities.Add(new SelectListItem
                     {
-                        Text = await _localizationService.GetLocalizedAsync(c, x => x.Name),
+                        //Text = await _localizationService.GetLocalizedAsync(c, x => x.Name),
+                        Text = c.Name,
                         Value = c.Id.ToString(),
                         Selected = c.Id == model.CityId
-                    });
+                    }) ;
                 }
                 //******
                 var _languageId = (await EngineContext.Current.Resolve<IWorkContext>().GetWorkingLanguageAsync()).Id;
@@ -309,16 +313,21 @@ namespace Nop.Web.Factories
                     .ToList();
                 if (districts.Any())
                 {
-                    model.AvailableDistricts.Add(new SelectListItem { Text = await _localizationService.GetResourceAsync("Address.SelectDistrict"), Value = "0" });
+                    model.AvailableDistricts.Add(new SelectListItem { 
+                        //Text = await _localizationService.GetResourceAsync("Address.SelectDistrict")
+                        Text = "Select District"
+                        , Value = "0" 
+                    });
 
                     foreach (var s in districts)
                     {
                         model.AvailableDistricts.Add(new SelectListItem
                         {
-                            Text = await _localizationService.GetLocalizedAsync(s, x => x.Name),
+                            //Text = await _localizationService.GetLocalizedAsync(s, x => x.Name),
+                            Text = s.Name,
                             Value = s.Id.ToString(),
                             Selected = (s.Id == model.DistrictId)
-                        });
+                        }) ;
                     }
                 }
                 else
@@ -326,7 +335,8 @@ namespace Nop.Web.Factories
                     var anyCitySelected = model.AvailableCities.Any(x => x.Selected);
                     model.AvailableDistricts.Add(new SelectListItem
                     {
-                        Text = await _localizationService.GetResourceAsync(anyCitySelected ? "Address.Other" : "Address.SelectDistrict"),
+                        //Text = await _localizationService.GetResourceAsync(anyCitySelected ? "Address.Other" : "Address.SelectDistrict"),
+                        Text = anyCitySelected ? "Other" : "Select District",
                         Value = "0"
                     });
                 }
