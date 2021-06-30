@@ -51,7 +51,8 @@ namespace Nop.Web.Models.Common
         public int? DistrictId { get; set; }
         [NopResourceDisplayName("District")]
         public string DistrictName { get; set; }
-
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
         public bool CountyEnabled { get; set; }
         public bool CountyRequired { get; set; }
         [NopResourceDisplayName("Address.Fields.County")]

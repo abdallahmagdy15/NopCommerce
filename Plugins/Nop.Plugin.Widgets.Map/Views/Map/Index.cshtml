@@ -1,67 +1,167 @@
 ﻿<style>
-    #checkoutmap{
-        width:70%;
-        height:400px;
-        display:block;
-        margin :2rem auto;
+    #checkoutmap {
+        width: 70%;
+        height: 400px;
+        display: block;
+        margin: 2rem auto;
     }
-    .map-label{
-        text-align:center;
-        margin:0 auto;
-        display:block;
+
+    .map-label {
+        text-align: center;
+        margin: 0 auto;
+        display: block;
     }
+
     .mapForm {
         display: block;
         margin: 2rem auto;
     }
+    #pac-input {
+        height: 2.5rem;
+        width: 50%;
+        text-align: right;
+        margin-top: 10px;
+        padding: .5rem;
+    }
 </style>
 <h2 class="map-label">Pick from map a location</h2>
+<input id="pac-input" />
 <div id="checkoutmap"></div>
-<form class="mapForm" data-ajax="true" asp-controller="Map" asp-action="Index">
-    <div class="inputs">
-        <label for="lat_inp" >Latitude: </label>
-        <input name="Latitude" id="lat_inp" type="number" placeholder="Latitude..." />
-    </div>
-    <div class="inputs">
-        <label for="lng_inp" >Longitude: </label>
-        <input name="Longitude" id="lng_inp" type="number" placeholder="Longitude..." />
-    </div>
-    <input type="submit" value="Save" class="button-1" />
-</form>
+@*<form class="mapForm" data-ajax="true" asp-controller="Map" asp-action="Index">
+        <div class="inputs">
+            <label for="lat_inp" >Latitude: </label>
+            <input name="Latitude" id="lat_inp" type="number" placeholder="Latitude..." />
+        </div>
+        <div class="inputs">
+            <label for="lng_inp" >Longitude: </label>
+            <input name="Longitude" id="lng_inp" type="number" placeholder="Longitude..." />
+        </div>
+        <input type="submit" value="Save" class="button-1" />
+    </form>*@
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCusR6WmijqxrnFpR0XeVB_PCiViscWrZ4&callback=initMap&libraries=&v=weekly" async></script>
-
+@*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCusR6WmijqxrnFpR0XeVB_PCiViscWrZ4&callback=initMap&libraries=&v=weekly" async></script>*@
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbwcRdDylRg2IoZhU9_LmWa7dD6YL85Xk&callback=initMap&libraries=places&language=ar"
+        async></script>
 <script>
     function initMap() {
-        const myLatlng = { lat: -25.363, lng: 131.044 };
+        let myLatlng = { lat: -33.8688, lng: 151.2195 };
         const map = new google.maps.Map(document.getElementById("checkoutmap"), {
-            zoom: 4,
             center: myLatlng,
+            zoom: 13,
+            mapTypeId: "roadmap",
         });
-        // Create the initial InfoWindow.
-        let infoWindow = new google.maps.InfoWindow({
-            content: "Click the map to get Lat/Lng!",
+        // Create the search box and link it to the UI element.
+        const input = document.getElementById("pac-input");
+        const searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener("bounds_changed", () => {
+            searchBox.setBounds(map.getBounds());
+        });
+        let markers = [];
+        let marker = new google.maps.Marker({
+            draggable: true,
             position: myLatlng,
+            map: map,
+            title: "Default location"
         });
-        infoWindow.open(map);
-        // Configure the click listener.
-        map.addListener("click", (mapsMouseEvent) => {
-            // Close the current InfoWindow.
-            infoWindow.close();
-            // Create a new InfoWindow.
-            infoWindow = new google.maps.InfoWindow({
-                position: mapsMouseEvent.latLng,
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener("places_changed", () => {
+            const places = searchBox.getPlaces();
+
+            if (places.length == 0) {
+                return;
+            }
+            // Clear out the old markers.
+            markers.forEach((marker) => {
+                marker.setMap(null);
             });
-            infoWindow.setContent(
-                JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
-            );
+            markers = [];
+            // For each place, get the icon, name and location.
+            const bounds = new google.maps.LatLngBounds();
+            places.forEach((place) => {
+                if (!place.geometry || !place.geometry.location) {
+                    console.log("Returned place contains no geometry");
+                    return;
+                }
+                const icon = {
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(25, 25),
+                };
+                // Create a marker for each place.
+                markers.push(
+                    new google.maps.Marker({
+                        map,
+                        icon,
+                        title: place.name,
+                        position: place.geometry.location,
+                    })
+                );
 
-            infoWindow.open(map);
+                if (place.geometry.viewport) {
+                    // Only geocodes have viewport.
+                    bounds.union(place.geometry.viewport);
+                } else {
+                    bounds.extend(place.geometry.location);
+                }
+            });
+            map.fitBounds(bounds);
+        });
 
+        //++++++++ get current position
+
+        // infoWindow = new google.maps.InfoWindow();
+        // const locationButton = document.createElement("button");
+        // locationButton.textContent = "Pan to Current Location";
+        // locationButton.classList.add("custom-map-control-button");
+        // map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+        // locationButton.addEventListener("click", () => {
+        //     // Try HTML5 geolocation.
+        //     if (navigator.geolocation) {
+        //         navigator.geolocation.getCurrentPosition(
+        //             (position) => {
+        //                 const pos = {
+        //                     lat: position.coords.latitude,
+        //                     lng: position.coords.longitude,
+        //                 };
+        //                 infoWindow.setPosition(pos);
+        //                 infoWindow.setContent("Location found.");
+        //                 infoWindow.open(map);
+        //                 map.setCenter(pos);
+        //             },
+        //             () => {
+        //                 handleLocationError(true, infoWindow, map.getCenter());
+        //             }
+        //         );
+        //     } else {
+        //         // Browser doesn't support Geolocation
+        //         handleLocationError(false, infoWindow, map.getCenter());
+        //     }
+        // });
+
+
+        // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        //     infoWindow.setPosition(pos);
+        //     infoWindow.setContent(
+        //         browserHasGeolocation
+        //             ? "Error: The Geolocation service failed."
+        //             : "Error: Your browser doesn't support geolocation."
+        //     );
+        //     infoWindow.open(map);
+        // }
+        //--------end get curr pos
+        //++++++++++ Configure the click listener add marker.
+        map.addListener("click", (mapsMouseEvent) => {
             const latlngObj = mapsMouseEvent.latLng.toJSON();
-
             $('#lat_inp').val(latlngObj.lat);
             $('#lng_inp').val(latlngObj.lng);
+            marker.setPosition(latlngObj);
         });
+        //**end
     }
+
 </script>

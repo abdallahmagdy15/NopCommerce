@@ -303,6 +303,8 @@ namespace Nop.Services.Common
                 StateProvinceId = address.StateProvinceId,
                 County = address.County,
                 City = address.City,
+                Latitude = address.Latitude,
+                Longitude = address.Longitude,
                 Address1 = address.Address1,
                 Address2 = address.Address2,
                 ZipPostalCode = address.ZipPostalCode,

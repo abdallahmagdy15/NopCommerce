@@ -20,6 +20,7 @@
         <nop-required />
         <span asp-validation-for="Email"></span>
     </div>
+
     @if (Model.CompanyEnabled)
     {
         <div class="inputs">
@@ -86,6 +87,11 @@
             </div>
         }*@
 
+
+
+    @* lat long input *@
+        <input name="Latitude" id="lat_inp" type="number" hidden />
+        <input name="Longitude" id="lng_inp" type="number" hidden />
     @* **City input dropdown** *@
     <div class="inputs">
         <label asp-for="CityId" asp-postfix=":"></label>
@@ -100,9 +106,9 @@
     <div class="inputs">
         <label asp-for="DistrictId" asp-postfix=":"></label>
         <select asp-for="DistrictId" asp-items="Model.AvailableDistricts"
-                    data-trigger="district-select">
-            </select>
-            <span id="district-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait")</span>
+                data-trigger="district-select">
+        </select>
+        <span id="district-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait")</span>
         <span asp-validation-for="DistrictId"></span>
     </div>
     @* **end** *@
