@@ -14,8 +14,6 @@ namespace Nop.Data.Migrations
               .WithColumn(nameof(City.Id)).AsInt32().PrimaryKey()
               .WithColumn(nameof(City.Name)).AsString(100).NotNullable()
               .WithColumn(nameof(City.Abbreviation)).AsString(100).Nullable()
-              .WithColumn(nameof(City.Published)).AsBoolean()
-              .WithColumn(nameof(City.DisplayOrder)).AsInt32()
               .WithColumn(nameof(City.StateProvinceId)).AsInt32().ForeignKey(nameof(StateProvince),nameof(StateProvince.Id));
         }
 
