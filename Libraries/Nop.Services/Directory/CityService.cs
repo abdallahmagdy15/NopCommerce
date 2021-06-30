@@ -86,7 +86,7 @@ namespace Nop.Services.Directory
         {
             var query = from sp in _cityRepository.Table
                         orderby sp.StateProvinceId, sp.DisplayOrder, sp.Name
-                        where showHidden || sp.Published
+                        where  sp.Published
                         select sp;
 
 

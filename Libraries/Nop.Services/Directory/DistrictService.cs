@@ -119,17 +119,9 @@ namespace Nop.Services.Directory
         {
             var query = from sp in _districtRepository.Table
                         orderby sp.DisplayOrder,sp.Name
-                        where sp.CityId== cityId && showHidden
+                        where sp.CityId== cityId
                         select sp;
             var districts = await query.ToListAsync();
-
-            if (languageId > 0)
-                //we should sort states by localized names when they have the same display order
-                districts = await districts.ToAsyncEnumerable()
-                    .OrderBy(c => c.DisplayOrder)
-                    .ThenByAwait(async c => await _localizationService.GetLocalizedAsync(c, x => x.Name, languageId))
-                    .ToListAsync();
-
             return districts;
         }
 
