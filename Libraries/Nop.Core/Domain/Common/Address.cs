@@ -56,6 +56,14 @@ namespace Nop.Core.Domain.Common
         /// Gets or sets the city
         /// </summary>
         public string City { get; set; }
+        /// <summary>
+        /// Gets or sets the city
+        /// </summary>
+        public string Latitude { get; set; }
+        /// <summary>
+        /// Gets or sets the city
+        /// </summary>
+        public string Longitude { get; set; }
 
         /// <summary>
         /// Gets or sets the address 1
