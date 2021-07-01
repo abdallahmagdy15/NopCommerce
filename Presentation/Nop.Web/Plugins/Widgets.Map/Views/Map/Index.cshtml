@@ -12,7 +12,7 @@
         height: 100%;
     }
 
-    #pac-input {
+    #addressInputGotByMap {
         width: 70%;
         margin-top: 0.6rem;
         height: 2.6rem;
@@ -74,8 +74,6 @@
     }
 </style>
 
-<input id="pac-input" />
-
 <div id="map_canvas_cr">
     <div id="map_canvas"></div>
     <div id="map_results_cr">
@@ -103,7 +101,7 @@
         };
         const map = new google.maps.Map(document.getElementById("map_canvas"), {
             center: myLatlng,
-            zoom: 6,
+            zoom: 8,
             mapTypeId: "roadmap",
             restriction: {
                 latLngBounds: SAUDI_ARABIA_BOUNDS,
@@ -114,7 +112,7 @@
         const geocoder = new google.maps.Geocoder();
 
         // Create the search box and link it to the UI element.
-        const input = document.getElementById("pac-input");
+        const input = document.getElementById("addressInputGotByMap");
         const searchBox = new google.maps.places.SearchBox(input);
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         // Bias the SearchBox results towards current map's viewport.
@@ -267,7 +265,7 @@
         $(document).on("click", '#map_results li', function () {
             console.log('li clicked')
             console.log($(this).text())
-            $('#pac-input').val($(this).text())
+            $('#addressInputGotByMap').val($(this).text())
         })
 
         $('#results_title').click(function () {
@@ -277,6 +275,11 @@
                 $('#results_title_toggle').text("▼");
             else
                 $('#results_title_toggle').text("▲");
+        })
+
+        $(document).on('change', '#addressInputGotByMap', function () {
+            console.log("on change map search:", $(this).val())
+            $("#addressInputByMap").val($(this).val())
         })
 
         //**end

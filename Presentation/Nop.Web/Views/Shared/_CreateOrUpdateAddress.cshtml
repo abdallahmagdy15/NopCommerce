@@ -128,8 +128,8 @@
     @if (Model.StreetAddress2Enabled)
     {
         <div class="inputs">
-            <label asp-for="Address2" asp-postfix=":"></label>
-            <input asp-for="Address2" />
+            @*<label asp-for="Address2" asp-postfix=":"></label>*@
+            <input asp-for="Address2" id="addressInputGotByMap"/>
             @if (Model.StreetAddress2Required)
             {
                 <nop-required />
