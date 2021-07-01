@@ -90,9 +90,12 @@
 
 
     @* lat long input *@
-        <input name="Latitude" id="lat_inp" type="number" hidden />
-        <input name="Longitude" id="lng_inp" type="number" hidden />
+    <input name="Latitude" id="lat_inp" type="number" hidden />
+    <input name="Longitude" id="lng_inp" type="number" hidden />
+
     @* **City input dropdown** *@
+
+    @if (Model.CityEnabled){
     <div class="inputs">
         <label asp-for="CityId" asp-postfix=":"></label>
         <select asp-for="CityId" asp-items="Model.AvailableCities"
@@ -102,16 +105,18 @@
                 data-loading="#district-loading-progress"></select>
         <span asp-validation-for="CityId"></span>
     </div>
+    }
     @* **District input dropdown** *@
-    <div class="inputs">
-        <label asp-for="DistrictId" asp-postfix=":"></label>
-        <select asp-for="DistrictId" asp-items="Model.AvailableDistricts"
-                data-trigger="district-select">
-        </select>
-        <span id="district-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait")</span>
-        <span asp-validation-for="DistrictId"></span>
-    </div>
-    @* **end** *@
+    @if (Model.DistrictEnabled)
+        <div class="inputs">
+            <label asp-for="DistrictId" asp-postfix=":"></label>
+            <select asp-for="DistrictId" asp-items="Model.AvailableDistricts"
+                    data-trigger="district-select">
+            </select>
+            <span id="district-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait")</span>
+            <span asp-validation-for="DistrictId"></span>
+        </div>
+        @* **end** *@
 
     @if (Model.StreetAddressEnabled)
     {
@@ -129,7 +134,7 @@
     {
         <div class="inputs">
             @*<label asp-for="Address2" asp-postfix=":"></label>*@
-            <input asp-for="Address2" id="addressInputGotByMap"/>
+            <input asp-for="Address2" id="addressInputGotByMap" />
             @if (Model.StreetAddress2Required)
             {
                 <nop-required />

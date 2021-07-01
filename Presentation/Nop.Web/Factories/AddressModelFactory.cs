@@ -354,6 +354,8 @@ namespace Nop.Web.Factories
             model.ZipPostalCodeRequired = addressSettings.ZipPostalCodeRequired;
             model.CityEnabled = addressSettings.CityEnabled;
             model.CityRequired = addressSettings.CityRequired;
+            model.DistrictEnabled = addressSettings.DistrictEnabled;
+            model.DistrictRequired = addressSettings.DistrictRequired;
             model.CountyEnabled = addressSettings.CountyEnabled;
             model.CountyRequired = addressSettings.CountyRequired;
             model.CountryEnabled = addressSettings.CountryEnabled;

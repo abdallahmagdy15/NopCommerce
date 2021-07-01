@@ -60,6 +60,8 @@ namespace Nop.Web.Models.Common
 
         public bool CityEnabled { get; set; }
         public bool CityRequired { get; set; }
+        public bool DistrictEnabled { get; set; }
+        public bool DistrictRequired { get; set; }
         [NopResourceDisplayName("Address.Fields.City")]
         public string City { get; set; }
 
