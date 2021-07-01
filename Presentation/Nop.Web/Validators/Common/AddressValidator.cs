@@ -13,6 +13,7 @@ namespace Nop.Web.Validators.Common
     {
         public AddressValidator(ILocalizationService localizationService,
             IStateProvinceService stateProvinceService,
+            IDistrictService districtService,
             AddressSettings addressSettings,
             CustomerSettings customerSettings)
         {
@@ -28,6 +29,7 @@ namespace Nop.Web.Validators.Common
             RuleFor(x => x.Email)
                 .EmailAddress()
                 .WithMessageAwait(localizationService.GetResourceAsync("Common.WrongEmail"));
+            ////////////////////
             if (addressSettings.CountryEnabled)
             {
                 RuleFor(x => x.CountryId)
@@ -55,6 +57,35 @@ namespace Nop.Web.Validators.Common
                     return true;
                 }).WithMessageAwait(localizationService.GetResourceAsync("Address.Fields.StateProvince.Required"));
             }
+            /////////
+            if (addressSettings.CityEnabled)
+            {
+                RuleFor(x => x.CityId)
+                    .NotNull()
+                    .WithMessage("City required");
+                RuleFor(x => x.CityId)
+                    .NotEqual(0)
+                    .WithMessage("City Required");
+            }
+            if (addressSettings.CityEnabled && addressSettings.DistrictEnabled)
+            {
+                RuleFor(x => x.DistrictId).MustAwait(async (x, context) =>
+                {
+                    //does selected city has districts?
+                    var cityId = x.CityId ?? 0;
+                    var hasDistricts = (await districtService.GetDistrictsByCityIdAsync(cityId)).Any();
+
+                    if (hasDistricts)
+                    {
+                        //if yes, then ensure that district is selected
+                        if (!x.DistrictId.HasValue || x.DistrictId.Value == 0)
+                            return false;
+                    }
+
+                    return true;
+                }).WithMessage("District Required");
+            }
+            /////////
             if (addressSettings.CompanyRequired && addressSettings.CompanyEnabled)
             {
                 RuleFor(x => x.Company).NotEmpty().WithMessageAwait(localizationService.GetResourceAsync("Account.Fields.Company.Required"));

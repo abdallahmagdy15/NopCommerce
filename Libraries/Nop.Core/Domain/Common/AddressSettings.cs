@@ -55,7 +55,18 @@ namespace Nop.Core.Domain.Common
         /// <summary>
         /// Gets or sets a value indicating whether 'City' is required
         /// </summary>
+        public bool DistrictRequired { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether 'City' is enabled
+        /// </summary>
+        public bool DistrictEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether 'City' is required
+        /// </summary>
         public bool CityRequired { get; set; }
+
 
         /// <summary>
         /// Gets or sets a value indicating whether 'County' is enabled

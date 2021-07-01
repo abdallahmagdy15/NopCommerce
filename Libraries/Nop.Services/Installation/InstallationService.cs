@@ -3150,6 +3150,8 @@ namespace Nop.Services.Installation
                 ZipPostalCodeRequired = true,
                 CityEnabled = true,
                 CityRequired = true,
+                DistrictEnabled = true,
+                DistrictRequired = true,
                 CountyEnabled = false,
                 CountyRequired = false,
                 CountryEnabled = true,
