@@ -325,6 +325,11 @@ namespace Nop.Core.Domain.Customers
         public bool CityEnabled { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether 'District' is enabled
+        /// </summary>
+        public bool DistrictEnabled { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether 'City' is required
         /// </summary>
         public bool CityRequired { get; set; }
