@@ -1,5 +1,5 @@
 ﻿{
-  "DataConnectionString": "Data Source=ABDALLAHM15\\SQLDEVELOPER;Initial Catalog=NopCommerce;Integrated Security=True;Persist Security Info=False",
+  "DataConnectionString": "Data Source=ABDALLAHMAGDY;Initial Catalog=NopCommerce;Integrated Security=True;Persist Security Info=False",
   "DataProvider": "sqlserver",
   "SQLCommandTimeout": null,
   "RawDataSettings": {}

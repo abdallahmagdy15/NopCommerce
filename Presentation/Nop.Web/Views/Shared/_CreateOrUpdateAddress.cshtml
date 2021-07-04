@@ -108,6 +108,7 @@
     }
     @* **District input dropdown** *@
     @if (Model.DistrictEnabled)
+    {
         <div class="inputs">
             <label asp-for="DistrictId" asp-postfix=":"></label>
             <select asp-for="DistrictId" asp-items="Model.AvailableDistricts"
@@ -117,7 +118,7 @@
             <span asp-validation-for="DistrictId"></span>
         </div>
         @* **end** *@
-
+    }
     @if (Model.StreetAddressEnabled)
     {
         <div class="inputs">
