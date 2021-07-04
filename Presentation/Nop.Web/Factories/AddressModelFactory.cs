@@ -200,6 +200,8 @@ namespace Nop.Web.Factories
                 model.StateProvinceName = await _stateProvinceService.GetStateProvinceByAddressAsync(address) is StateProvince stateProvince ? await _localizationService.GetLocalizedAsync(stateProvince, x => x.Name) : null;
                 model.County = address.County;
                 model.City = address.City;
+                model.CityId = address.CityId;
+                model.DistrictId = address.DistrictId;
                 model.Address1 = address.Address1;
                 model.Address2 = address.Address2;
                 model.ZipPostalCode = address.ZipPostalCode;
