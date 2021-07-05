@@ -32,8 +32,6 @@ namespace Nop.Web.Extensions
                     model.Company = model.Company.Trim();
                 if (model.County != null)
                     model.County = model.County.Trim();
-                if (model.City != null)
-                    model.City = model.City.Trim();
                 if (model.Address1 != null)
                     model.Address1 = model.Address1.Trim();
                 if (model.Address2 != null)
@@ -53,7 +51,8 @@ namespace Nop.Web.Extensions
             destination.CountryId = model.CountryId == 0 ? null : model.CountryId;
             destination.StateProvinceId = model.StateProvinceId == 0 ? null : model.StateProvinceId;
             destination.County = model.County;
-            destination.City = model.City;
+            destination.CityId = model.CityId;
+            destination.DistrictId = model.DistrictId;
             destination.Address1 = model.Address1;
             destination.Address2 = model.Address2;
             destination.ZipPostalCode = model.ZipPostalCode;
