@@ -106,7 +106,10 @@ namespace Nop.Web.Validators.Common
             {
                 RuleFor(x => x.County).NotEmpty().WithMessageAwait(localizationService.GetResourceAsync("Address.Fields.County.Required"));
             }
-
+            if (addressSettings.CityRequired && addressSettings.CityEnabled)
+            {
+                RuleFor(x => x.City).NotEmpty().WithMessageAwait(localizationService.GetResourceAsync("Account.Fields.City.Required"));
+            }
             if (addressSettings.PhoneRequired && addressSettings.PhoneEnabled)
             {
                 RuleFor(x => x.PhoneNumber).NotEmpty().WithMessageAwait(localizationService.GetResourceAsync("Account.Fields.Phone.Required"));

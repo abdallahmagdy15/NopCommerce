@@ -87,26 +87,10 @@
         </ul>
     </div>
 </div>
-<script>
-    //first delete previous instance of map
-    function removeGoogleMapScript() {
-        //console.debug('removing google script...');
-        let keywords = ['maps.googleapis'];
 
-        //Remove google from BOM (window object)
-        window.google = undefined;
-    }
-    removeGoogleMapScript();
-    var scripts = document.getElementsByClassName("map_api_script");
-    for (var s of scripts){
-        s.parentNode.removeChild(s);
-    }
-    
-</script>
-
-<script class="map_api_script" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbwcRdDylRg2IoZhU9_LmWa7dD6YL85Xk&callback=initMap&libraries=places&language=ar"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbwcRdDylRg2IoZhU9_LmWa7dD6YL85Xk&callback=initMap&libraries=places&language=ar"
         async></script>
-<script  class="map_api_script">
+<script>
     function initMap() {
         let myLatlng = { lat: 24.7135517, lng: 46.6752957 };
         const SAUDI_ARABIA_BOUNDS = {//32.1205,34.4853;16.3209,55.8428

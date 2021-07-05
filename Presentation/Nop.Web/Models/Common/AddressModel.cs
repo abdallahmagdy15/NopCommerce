@@ -45,10 +45,12 @@ namespace Nop.Web.Models.Common
         public string StateProvinceName { get; set; }
         [NopResourceDisplayName("City")]
         public int? CityId { get; set; }
-        //public string CityName { get; set; }
+        [NopResourceDisplayName("City")]
+        public string CityName { get; set; }
         [NopResourceDisplayName("District")]
         public int? DistrictId { get; set; }
-        //public string DistrictName { get; set; }
+        [NopResourceDisplayName("District")]
+        public string DistrictName { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
         public bool CountyEnabled { get; set; }
@@ -60,6 +62,8 @@ namespace Nop.Web.Models.Common
         public bool CityRequired { get; set; }
         public bool DistrictEnabled { get; set; }
         public bool DistrictRequired { get; set; }
+        [NopResourceDisplayName("Address.Fields.City")]
+        public string City { get; set; }
 
         public bool StreetAddressEnabled { get; set; }
         public bool StreetAddressRequired { get; set; }

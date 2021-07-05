@@ -42,7 +42,7 @@
                 data-url="@(Url.RouteUrl("GetStatesByCountryId"))"
                 data-stateprovince="#@Html.IdFor(model => model.StateProvinceId)"
                 data-loading="#states-loading-progress"></select>*@
-            <input asp-for="CountryId" id="CountryId" type="number" value="196" hidden />
+            <input name="CountryId" asp-for="CountryId" id="CountryId" type="number" value="196" hidden />
             <label>Saudi Arabia</label>
             <span asp-validation-for="CountryId"></span>
         </div>
@@ -56,7 +56,7 @@
                         data-trigger="state-select">
                 </select>
                 <span id="states-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait")</span>*@
-            <input asp-for="StateProvinceId" id="StateProvinceId" type="number" value="1515" hidden />
+            <input name="StateProvinceId" asp-for="StateProvinceId" id="StateProvinceId" type="number" value="1515" hidden />
             <Label>Al Riyadh</Label>
             <span asp-validation-for="StateProvinceId"></span>
         </div>

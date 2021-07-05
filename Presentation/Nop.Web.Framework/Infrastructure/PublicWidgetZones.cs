@@ -125,7 +125,6 @@
         public static string OpcContentBefore => "opc_content_before";
         public static string OpCheckoutBillingAddressBottom => "op_checkout_billing_address_bottom";
         public static string OpCheckoutBillingAddressMiddle => "op_checkout_billing_address_middle";
-        public static string OpCheckoutBillingAddressBefore => "op_checkout_billing_address_before";
         public static string OpCheckoutBillingAddressTop => "op_checkout_billing_address_top";
         public static string OpCheckoutConfirmBottom => "op_checkout_confirm_bottom";
         public static string OpCheckoutConfirmTop => "op_checkout_confirm_top";
