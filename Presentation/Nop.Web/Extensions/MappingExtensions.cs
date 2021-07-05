@@ -59,6 +59,8 @@ namespace Nop.Web.Extensions
             destination.ZipPostalCode = model.ZipPostalCode;
             destination.PhoneNumber = model.PhoneNumber;
             destination.FaxNumber = model.FaxNumber;
+            destination.Latitude = model.Latitude;
+            destination.Longitude = model.Longitude;
 
             return destination;
         }

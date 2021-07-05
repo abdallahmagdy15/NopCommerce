@@ -92,6 +92,7 @@ namespace Nop.Services.Common
         /// <returns>Address</returns>
         Address FindAddress(List<Address> source, string firstName, string lastName, string phoneNumber, string email,
             string faxNumber, string company, string address1, string address2, string city, string county, int? stateProvinceId,
+            int? cityId, int? districtId, decimal? latitude, decimal? longitude,
             string zipPostalCode, int? countryId, string customAttributes);
 
         //TODO: migrate to an extension method
