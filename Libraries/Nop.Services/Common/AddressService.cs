@@ -267,6 +267,7 @@ namespace Nop.Services.Common
         /// <returns>Address</returns>
         public virtual Address FindAddress(List<Address> source, string firstName, string lastName, string phoneNumber, string email,
             string faxNumber, string company, string address1, string address2, string city, string county, int? stateProvinceId,
+            int? cityId ,int? districtId , decimal? latitude , decimal? longitude, 
             string zipPostalCode, int? countryId, string customAttributes)
         {
             return source.Find(a => ((string.IsNullOrEmpty(a.FirstName) && string.IsNullOrEmpty(firstName)) || a.FirstName == firstName) &&
@@ -280,6 +281,13 @@ namespace Nop.Services.Common
             ((string.IsNullOrEmpty(a.City) && string.IsNullOrEmpty(city)) || a.City == city) &&
             ((string.IsNullOrEmpty(a.County) && string.IsNullOrEmpty(county)) || a.County == county) &&
             ((a.StateProvinceId == null && (stateProvinceId == null || stateProvinceId == 0)) || (a.StateProvinceId != null && a.StateProvinceId == stateProvinceId)) &&
+            //**
+            ((a.CityId == null && (cityId == null || cityId == 0)) || (a.CityId != null && a.CityId == cityId)) &&
+            ((a.DistrictId == null && (districtId == null || districtId == 0)) || (a.DistrictId != null && a.DistrictId == districtId)) &&
+            ((a.Latitude == null && (latitude == null || latitude == 0)) || (a.Latitude != null && a.Latitude == latitude)) &&
+            ((a.Longitude == null && (longitude == null || longitude == 0)) || (a.Longitude != null && a.Longitude == longitude)) &&
+            //**
+
             ((string.IsNullOrEmpty(a.ZipPostalCode) && string.IsNullOrEmpty(zipPostalCode)) || a.ZipPostalCode == zipPostalCode) &&
             ((a.CountryId == null && countryId == null) || (a.CountryId != null && a.CountryId == countryId)) &&
             //actually we should parse custom address attribute (in case if "Display order" is changed) and then compare
@@ -303,6 +311,8 @@ namespace Nop.Services.Common
                 StateProvinceId = address.StateProvinceId,
                 County = address.County,
                 City = address.City,
+                CityId = address.CityId,
+                DistrictId = address.DistrictId,
                 Latitude = address.Latitude,
                 Longitude = address.Longitude,
                 Address1 = address.Address1,

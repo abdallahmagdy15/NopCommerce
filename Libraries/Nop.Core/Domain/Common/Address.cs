@@ -57,13 +57,13 @@ namespace Nop.Core.Domain.Common
         /// </summary>
         public string City { get; set; }
         /// <summary>
-        /// Gets or sets the city
+        /// Gets or sets the Latitude
         /// </summary>
-        public string Latitude { get; set; }
+        public decimal? Latitude { get; set; }
         /// <summary>
-        /// Gets or sets the city
+        /// Gets or sets the Longitude
         /// </summary>
-        public string Longitude { get; set; }
+        public decimal? Longitude { get; set; }
 
         /// <summary>
         /// Gets or sets the address 1
