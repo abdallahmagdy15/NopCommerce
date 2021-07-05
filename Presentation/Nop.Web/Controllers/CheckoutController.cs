@@ -1319,6 +1319,7 @@ namespace Nop.Web.Controllers
             //
             model.BillingNewAddress.CountryId = 196;
             model.BillingNewAddress.StateProvinceId = 1515;
+           
             //
             //
             try
@@ -1361,7 +1362,17 @@ namespace Nop.Web.Controllers
                     {
                         ModelState.AddModelError("", error);
                     }
-
+                    //remove countryid , stateprovinceid errors as they are static
+                    if (ModelState.ContainsKey("BillingNewAddress.CountryId"))
+                    {
+                        ModelState["BillingNewAddress.CountryId"].Errors.Clear();
+                        ModelState["BillingNewAddress.CountryId"].ValidationState = Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Valid;
+                    }
+                    else if (ModelState.ContainsKey("{BillingNewAddress.StateProvinceId}"))
+                    {
+                        ModelState["{BillingNewAddress.StateProvinceId}"].Errors.Clear();
+                        ModelState["{BillingNewAddress.StateProvinceId}"].ValidationState = Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Valid;
+                    }
                     //validate model
                     if (!ModelState.IsValid)
                     {
