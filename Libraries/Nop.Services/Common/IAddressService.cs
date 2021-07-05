@@ -91,7 +91,7 @@ namespace Nop.Services.Common
         /// <param name="customAttributes">Custom address attributes (XML format)</param>
         /// <returns>Address</returns>
         Address FindAddress(List<Address> source, string firstName, string lastName, string phoneNumber, string email,
-            string faxNumber, string company, string address1, string address2, int? cityId,int? districtId, string county, int? stateProvinceId,
+            string faxNumber, string company, string address1, string address2, string city, string county, int? stateProvinceId,
             string zipPostalCode, int? countryId, string customAttributes);
 
         //TODO: migrate to an extension method

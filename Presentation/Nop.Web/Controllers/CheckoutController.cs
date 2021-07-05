@@ -539,7 +539,7 @@ namespace Nop.Web.Controllers
                 var address = _addressService.FindAddress((await _customerService.GetAddressesByCustomerIdAsync((await _workContext.GetCurrentCustomerAsync()).Id)).ToList(),
                     newAddress.FirstName, newAddress.LastName, newAddress.PhoneNumber,
                     newAddress.Email, newAddress.FaxNumber, newAddress.Company,
-                    newAddress.Address1, newAddress.Address2, newAddress.CityId,newAddress.DistrictId
+                    newAddress.Address1, newAddress.Address2, newAddress.City,
                     newAddress.County, newAddress.StateProvinceId, newAddress.ZipPostalCode,
                     newAddress.CountryId, customAttributes);
 
@@ -1544,7 +1544,7 @@ namespace Nop.Web.Controllers
                     var address = _addressService.FindAddress((await _customerService.GetAddressesByCustomerIdAsync((await _workContext.GetCurrentCustomerAsync()).Id)).ToList(),
                         newAddress.FirstName, newAddress.LastName, newAddress.PhoneNumber,
                         newAddress.Email, newAddress.FaxNumber, newAddress.Company,
-                        newAddress.Address1, newAddress.Address2, newAddress.CityId,
+                        newAddress.Address1, newAddress.Address2, newAddress.City,
                         newAddress.County, newAddress.StateProvinceId, newAddress.ZipPostalCode,
                         newAddress.CountryId, customAttributes);
 
