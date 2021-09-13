@@ -66,6 +66,10 @@
     <Folder Include="Plugins\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="WebPush-NetCore" Version="1.0.2" />
+  </ItemGroup>
+
   <!-- This target execute after "Build" target.
     We use it to clean up folder with plugins from unnecessary and obsolete libraries. -->
   <Target Name="NopTarget" AfterTargets="Build">

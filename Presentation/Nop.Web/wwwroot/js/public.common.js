@@ -1,7 +1,75 @@
 ﻿/*
 ** nopCommerce custom js functions
 */
+$(document).ready(function () {
+    //***** notifications *****
+    if ('serviceWorker' in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/js/ServiceWorker.js")
+                .then((reg) => {
+                    if (Notification.permission === "granted") {
+                        $("#form").show();
+                        getSubscription(reg);
+                    } else if (Notification.permission === "blocked") {
+                        $("#NoSupport").show();
+                    } else {
+                        $("#GiveAccess").show();
+                        $("#PromptForAccessBtn").click(() => requestNotificationAccess(reg));
+                    }
+                });
+        });
+    } else {
+        $("#NoSupport").show();
+    }
 
+    function requestNotificationAccess(reg) {
+        Notification.requestPermission(function (status) {
+            $("#GiveAccess").hide();
+            if (status == "granted") {
+                $("#form").show();
+                getSubscription(reg);
+            } else {
+                $("#NoSupport").show();
+            }
+        });
+    }
+
+
+    function fillSubscribeFields(sub) {
+        $("#endpoint").val(sub.endpoint);
+        $("#p256dh").val(arrayBufferToBase64(sub.getKey("p256dh")));
+        $("#auth").val(arrayBufferToBase64(sub.getKey("auth")));
+    }
+
+    function arrayBufferToBase64(buffer) {
+        var binary = '';
+        var bytes = new Uint8Array(buffer);
+        var len = bytes.byteLength;
+        for (var i = 0; i < len; i++) {
+            binary += String.fromCharCode(bytes[i]);
+        }
+        return window.btoa(binary);
+    }
+
+    function getSubscription(reg) {
+        reg.pushManager.getSubscription().then(function (sub) {
+            if (sub === null) {
+                reg.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: "BK_lpNeXgFqCHhEJTAX58rHxMUMyc-IczNyYpl0DR0YU81mfyAFpbOR0ZkF7BhIEEMm5gw-EKVi_NiUSbwZ8Oss"
+                }).then(function (sub) {
+                    fillSubscribeFields(sub);
+                }).catch(function (e) {
+                    console.error("Unable to subscribe to push", e);
+                });
+            } else {
+                fillSubscribeFields(sub);
+            }
+        });
+    }
+
+});
+    //***** end notifications
 
 
 function OpenWindow(query, w, h, scroll) {

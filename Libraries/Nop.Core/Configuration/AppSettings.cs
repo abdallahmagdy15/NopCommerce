@@ -52,6 +52,8 @@ namespace Nop.Core.Configuration
         [JsonExtensionData]
         public IDictionary<string, JToken> AdditionalData { get; set; }
 
+        public VAPID VAPID { get; set; }
+        
         #endregion
     }
 }

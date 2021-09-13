@@ -20,6 +20,24 @@
     Html.AppendPageCssClassParts("html-home-page");
 }
 <div class="page home-page">
+    <h1>Subscribe to Push Notifications</h1>
+    <div id="GiveAccess" style="display:none;">
+        Give access to making notifications:
+        <button id="PromptForAccessBtn">Prompt</button>
+    </div>
+    <div id="NoSupport" style="display:none;">
+        Your browser does not support Push Notifications or you have blocked notifications
+    </div>
+    <form asp-action="Index" id="form" style="display:none;">
+        <label for="client">Your name: </label>
+        <input id="client" name="client" /><br />
+
+        <input id="endpoint" name="endpoint" hidden />
+        <input id="p256dh" name="p256dh" hidden />
+        <input id="auth" name="auth" hidden />
+
+        <button type="submit">Subscribe</button>
+    </form>
     <div class="page-body">
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomepageTop })
         @await Component.InvokeAsync("TopicBlock", new { systemName = "HomepageText" })
@@ -36,3 +54,6 @@
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomepageBottom })
     </div>
 </div>
+<script asp-location="Footer">
+   
+</script>
